@@ -1,63 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_accademic/answer.dart';
-import 'package:flutter_accademic/question.dart';
+import 'package:flutter_accademic/models/user_transaction.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyTransactionApp());
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  var questionIndex = 0;
-
-  void _answerQuestion() {
-    setState(() {
-      questionIndex++;
-    });
-  }
+class MyTransactionApp extends StatelessWidget {
+  const MyTransactionApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var question = [
-      "What's your name?",
-      "What is your best color?",
-      "How old are you?",
-      "What is name of your Mum?",
-    ];
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Flutter Tutor",
-          ),
+          title: const Text("Transaction App"),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+            )
+          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Question(questionText: question[questionIndex]),
-                  const SizedBox(height: 8.0),
-                  Answer(
-                    answerText: "answerText",
-                    onPressed: _answerQuestion,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        body: const SingleChildScrollView(child: UserTransactions()),
       ),
     );
   }
